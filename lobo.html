@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=/, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+         body{
+            background-position: center, center/cover;
+            background: url('https://img.freepik.com/free-vector/background-realistic-abstract-technology-particle_23-2148431735.jpg?ga=GA1.1.1468221698.1742365243&semt=ais_hybrid');
+background-repeat: no-repeat;
+
+         }  
+         
+    </style>
+     </style>
+    </head>
+    <body>
+    
+    <div class="login-container">
+        <h2>Welcome to Dorm Quest</h2>
+        <div class="error-message" id="error-message"></div>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-btn" onclick="attemptLogin()">Login</button>
+    </div>
+    
+    <script>
+        let loginAttempts = 0;
+        let lockTimer = null;
+        const maxAttempts = 1;
+    
+        function attemptLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            const loginButton = document.getElementById('login-btn');
+    
+            // Dummy username and password for the example
+            const correctUsername = "admin123";
+            const correctPassword = "admin123";
+    
+            if (lockTimer) {
+                errorMessage.textContent = "Incorrect username or password. Please wait 10 seconds.";
+                return;
+            }
+    
+            if (username === correctUsername && password === correctPassword) {
+                // Successful login
+                window.location.href = "file:///D:/New%20folder/index.html"; // Redirect to the next page
+            } else {
+                // Failed login
+                loginAttempts++;
+                if (loginAttempts >= maxAttempts) {
+                    errorMessage.textContent = "Incorrect username or password. Please wait 10 seconds.";
+                    loginButton.disabled = true;
+    
+                    // Lock login for 10 seconds
+                    lockTimer = setTimeout(() => {
+                        loginAttempts = 0;
+                        loginButton.disabled = false;
+                        errorMessage.textContent = "";
+                        lockTimer = null;
+                    }, 10000); // Reset after 10 seconds
+                } 
+            }
+        }
+    </script>
+</body>
+</html>
